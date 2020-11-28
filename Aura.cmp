@@ -1,0 +1,45 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" controller="ContactListController">
+    <aura:attribute name="contacts" type="Contact[]" default="{}"/>
+    <aura:attribute name="allContactsbackUp" type="Contact[]" default="{}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:button label="Refresh" onclick="{!c.doInit}"/>
+    
+    <div onkeyup="{!c.handleKeyUp}">
+        <lightning:input aura:id="enter-search"
+                         name="enter-search"
+                         label="Search When user hits the 'enter' key"
+                         type="Search"/>
+    </div>
+    
+    
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Contact Name">Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Contact Email">Email</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Phone">Phone</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.contacts}" var="item">
+                <tr class="slds-hint-parent">
+                    <td data-label="Name">
+                        <div class="slds-structure" title="">{!item.Name}</div>
+                    </td>
+                    <td data-label="Email">
+                        <div class="slds-structure" title="">{!item.Email}</div>
+                    </td>
+                    <td data-label="Phone">
+                        <div class="slds-truncate" title="">{!item.Phone}</div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>
